@@ -2,93 +2,1501 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Survey on All-in-One Image Restoration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 30px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1, h2 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        .authors {
-            text-align: center;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-        .abstract, .keywords {
-            margin-bottom: 20px;
-        }
-        .abstract h2, .keywords h2 {
-            border-bottom: 2px solid #2c3e50;
-            padding-bottom: 5px;
-            color: #2c3e50;
-        }
-        .repo-link {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .repo-link a {
-            text-decoration: none;
-            color: #fff;
-            background: #2c3e50;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-        .repo-link a:hover {
-            background: #34495e;
-        }
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            color: #777;
-            font-size: 0.9em;
-        }
-    </style>
+    <title>A Survey on All-in-One Image Restoration: Taxonomy, Evaluation and Future Trends</title>
+    <!-- Include Bootstrap CSS library -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include custom styles -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>A Survey on All-in-One Image Restoration</h1>
-        <div class="authors">
-            Junjun Jiang🖂, Zengyuan Zuo, Gang Wu, Kui Jiang, and Xianming Liu<br>
-            School of Computer Science and Technology, Harbin Institute of Technology, Harbin 150001, China
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">AiOIR Survey</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Navigation Links -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#abstract">Abstract</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#datasets">Datasets</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#experiments">Experiments</a>
+            </li>
+            <!-- Continue adding navigation items -->
+          </ul>
         </div>
+      </div>
+    </nav>
 
-        <div class="abstract">
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">A Survey on All-in-One Image Restoration: Taxonomy, Evaluation and Future Trends</h1>
+        <p class="text-center text-muted">Junjun Jiang, Zengyuan Zuo, Gang Wu, Kui Jiang, and Xianming Liu</p>
+        <p class="text-center text-muted">School of Computer Science and Technology, Harbin Institute of Technology, Harbin 150001, China</p>
+
+        <!-- Abstract -->
+        <section id="abstract" class="mt-5">
             <h2>Abstract</h2>
-            <p>
-                Image restoration (IR) is the process of improving the visual quality of images while removing degradation, such as noise, blur, weather effects, and so on. Traditional IR methods typically target specific types of degradation, which limits their effectiveness in real-world scenarios with complex distortions. In response to this challenge, the all-in-one image restoration (AiOIR) paradigm has emerged, offering a unified framework that adeptly addresses multiple degradation types. These innovative models enhance both convenience and versatility by adaptively learning degradation-specific features while simultaneously leveraging shared knowledge across diverse corruptions. In this review, we delve into the AiOIR methodologies, emphasizing their architecture innovations and learning paradigm and offering a systematic review of prevalent approaches. We systematically categorize prevalent approaches and critically assess the challenges these models encounter, proposing future research directions to advance this dynamic field. Our paper begins with an introduction to the foundational concepts of AiOIR models, followed by a categorization of cutting-edge designs based on factors such as prior knowledge and generalization capability. Next, we highlight key advancements in AiOIR, aiming to inspire further inquiry and innovation within the community. To facilitate a robust evaluation of existing methods, we collate and summarize commonly used datasets, implementation details, and evaluation metrics. Additionally, we present an objective comparison of open-sourced methods, providing valuable insights for researchers and practitioners alike. This paper stands as the first comprehensive and insightful review of AiOIR. A related repository is available at <a href="https://github.com/Harbinzzy/All-in-One-Image-Restoration-Survey" target="_blank">https://github.com/Harbinzzy/All-in-One-Image-Restoration-Survey</a>.
-            </p>
-        </div>
+            <p>All-in-One Image Restoration (AiOIR) focuses on improving the visual quality of images affected by various degradations such as noise, blur, and weather effects within a unified framework. Unlike traditional methods targeting specific degradation types, AiOIR models handle multiple degradations simultaneously, enhancing their effectiveness in real-world scenarios with complex distortions. This survey provides a comprehensive overview of AiOIR methodologies, highlighting architectural innovations and learning paradigms. We categorize prevalent approaches, discuss challenges faced by these models, and propose future research directions to advance this dynamic field. Additionally, we summarize commonly used datasets, implementation details, and evaluation metrics, offering an objective comparison of open-sourced methods to assist researchers and practitioners.</p>
+        </section>
 
-        <div class="keywords">
-            <h2>Index Terms</h2>
-            <p>All-in-One Model, Image Restoration, Computer Vision, Deep Learning</p>
-        </div>
+        <!-- Multimodal Models -->
+        <!-- <section id="multimodal-model" class="mt-5">
+            <h2>Multimodal Models</h2>
+            <p>Multimodal tasks are increasingly critical in computer vision, integrating diverse information sources to enrich visual understanding. In image restoration, multimodal models leverage data from multiple sources to improve the fidelity and robustness of restored images. These models incorporate complementary modalities to address limitations inherent in single-modality approaches, especially in scenarios involving complex degradations. We summarize various approaches to multimodal AiOIR methods, including those utilizing human language instructions for continuous guidance and the use of multimodal prompts.</p>
+        </section> -->
 
-        <div class="repo-link">
-            <a href="https://github.com/Harbinzzy/All-in-One-Image-Restoration-Survey" target="_blank">View the Repository on GitHub</a>
+        <!-- Other Methods -->
+        <!-- <section id="other-methods" class="mt-5">
+            <h2>Other Methods</h2>
+            <p>Apart from key advancements, we review other methods for AiOIR. Some models benefit from iterative algorithms within the deep unfolding framework. Large-scale vision models like CLIP and BLIP have shown promise in enhancing image restoration tasks by leveraging multimodal features. Additionally, integrating network design with pretrained Masked Image Modeling (MIM) holds significant potential. These approaches utilize semantic alignment and prior knowledge to enable robust and flexible image restoration.</p>
+        </section> -->
+        <section id="overview" class="mt-5">
+            <h2>Overview</h2>
+        </section>
+
+        <div class="text-center mb-4">
+            <img src="imgs/all.png" class="img-fluid" alt="Hierarchically-structured taxonomy">
+            <p class="mt-2 fw-light">Figure 1: Hierarchically-structured taxonomy of this survey.</p>
         </div>
+        <p>We aim to provide the first comprehensive overview of AiOIR methods in IR tasks, shedding light on both its representative approaches and diverse improvements. Figure 1 illustrates the taxonomy of this survey in a hierarchical structure.</p>
+        
+        <div class="text-center mb-4">
+            <img src="imgs/timeline.png" class="img-fluid" alt="Timeline of AiOIR works">
+            <p class="mt-2 fw-light">Figure 2: Representative works in AiOIR based on the timeline. The bar chart shows the number of papers in AiOIR from 2019 to October 2024.</p>
+        </div>
+        <p>We have listed the representative works on all-in-one models based on the timeline in Figure 2.</p>
+        
+        <div class="text-center mb-4">
+            <img src="imgs/type.jpg" class="img-fluid w-75" alt="Ten categories of AiOIR methods">
+            <p class="mt-2 fw-light">Figure 3: Ten categories of the image restoration method prototype (the last nine are AiOIR methods).</p>
+        </div>
+        <p>Existing all-in-one image restoration (AiOIR) methods employ various architectural designs to handle inputs and outputs across multiple tasks, enabling efficient information sharing among them. Despite significant differences in their architectures, AiOIR methods can be categorized into ten representative frameworks, as shown in Figure 3.</p>
+        
+
+        <!-- Datasets -->
+        <section id="datasets" class="mt-5">
+            <h2>Datasets</h2>
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Task</th>
+                        <th>Dataset</th>
+                        <th>Year</th>
+                        <th>Training</th>
+                        <th>Testing</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Image Deblurring -->
+                    <tr>
+                        <td rowspan="3">Image Deblurring</td>
+                        <td>GoPro</td>
+                        <td>2017</td>
+                        <td>2103</td>
+                        <td>1111</td>
+                        <td>Blurred images at 1280x720</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>HIDE</td>
+                        <td>2019</td>
+                        <td>6397</td>
+                        <td>2025</td>
+                        <td>Blurry and sharp image pairs</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>RealBlur</td>
+                        <td>2020</td>
+                        <td>3758</td>
+                        <td>980</td>
+                        <td>182 different scenes</td>
+                        <td>Real</td>
+                    </tr>
+
+                    <!-- Image Denoising -->
+                    <tr>
+                        <td rowspan="6">Image Denoising</td>
+                        <td>Kodak</td>
+                        <td>1999</td>
+                        <td>-</td>
+                        <td>24</td>
+                        <td>Lossless true color image suite</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>Urban100</td>
+                        <td>2015</td>
+                        <td>-</td>
+                        <td>100</td>
+                        <td>100 images of urban scenes</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>WED</td>
+                        <td>2016</td>
+                        <td>4744</td>
+                        <td>-</td>
+                        <td>Images collected from Internet</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>BSD400</td>
+                        <td>2010</td>
+                        <td>400</td>
+                        <td>-</td>
+                        <td>400 clean natural images</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>CBSD68</td>
+                        <td>2001</td>
+                        <td>-</td>
+                        <td>68</td>
+                        <td>Images with different noisy levels</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>McMaster</td>
+                        <td>2011</td>
+                        <td>-</td>
+                        <td>18</td>
+                        <td>Crop size = 500x500</td>
+                        <td>Real</td>
+                    </tr>
+
+                    <!-- Image Super-resolution -->
+                    <tr>
+                        <td rowspan="7">Image Super-resolution</td>
+                        <td>DIV2K</td>
+                        <td>2017</td>
+                        <td>800</td>
+                        <td>100</td>
+                        <td>2K resolutions</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>Flickr2K</td>
+                        <td>2017</td>
+                        <td>2650</td>
+                        <td>-</td>
+                        <td>2K resolutions</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>Set5</td>
+                        <td>2012</td>
+                        <td>-</td>
+                        <td>5</td>
+                        <td>Classic 5 images</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>Set14</td>
+                        <td>2012</td>
+                        <td>-</td>
+                        <td>14</td>
+                        <td>Classic 14 images</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>BSD100</td>
+                        <td>2001</td>
+                        <td>-</td>
+                        <td>100</td>
+                        <td>Objects, natural images</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>Manga109</td>
+                        <td>2015</td>
+                        <td>-</td>
+                        <td>109</td>
+                        <td>109 manga volumes</td>
+                        <td>Synthetic</td>
+                    </tr>
+                    <tr>
+                        <td>Urban100</td>
+                        <td>2015</td>
+                        <td>-</td>
+                        <td>100</td>
+                        <td>100 urban scenes</td>
+                        <td>Real</td>
+                    </tr>
+
+                    <!-- Shadow Removal -->
+                    <tr>
+                        <td rowspan="2">Shadow Removal</td>
+                        <td>ISTD</td>
+                        <td>2018</td>
+                        <td>1330</td>
+                        <td>540</td>
+                        <td>135 scenes with shadow mask images</td>
+                        <td>Synthetic</td>
+                    </tr>
+                    <tr>
+                        <td>SRD</td>
+                        <td>2017</td>
+                        <td>2680</td>
+                        <td>408</td>
+                        <td>Large-scale dataset for shadow removal</td>
+                        <td>Real</td>
+                    </tr>
+
+                    <!-- Image Desnowing -->
+                    <tr>
+                        <td rowspan="6">Image Desnowing</td>
+                        <td>Snow100k</td>
+                        <td>2017</td>
+                        <td>50,000</td>
+                        <td>50,000</td>
+                        <td>Including 1,369 realistic snowy images</td>
+                        <td>Real and Synthetic</td>
+                    </tr>
+                    <tr>
+                        <td>CSD</td>
+                        <td>2021</td>
+                        <td>2,000</td>
+                        <td>-</td>
+                        <td>Comprehensive Snow Dataset</td>
+                        <td>Synthetic</td>
+                    </tr>
+                    <tr>
+                        <td>REVIDE</td>
+                        <td>2021</td>
+                        <td>1,698</td>
+                        <td>284</td>
+                        <td>Real-world video dehazing</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>RealSnow+</td>
+                        <td>2023</td>
+                        <td>1,650</td>
+                        <td>240</td>
+                        <td>Various resolutions</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>KITTI-snow</td>
+                        <td>2023</td>
+                        <td>50</td>
+                        <td>-</td>
+                        <td>Two intensity levels: severe and extremely severe</td>
+                        <td>Synthetic</td>
+                    </tr>
+                    <tr>
+                        <td>WeatherStream</td>
+                        <td>2023</td>
+                        <td>176,100</td>
+                        <td>11,400</td>
+                        <td>Rain, snow, and fog conditions</td>
+                        <td>Real</td>
+                    </tr>
+
+                    <!-- Image Deraining -->
+                    <tr>
+                        <td rowspan="5">Image Deraining</td>
+                        <td>RainDrop</td>
+                        <td>2018</td>
+                        <td>1,119</td>
+                        <td>-</td>
+                        <td>Various scenes and raindrops</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>Outdoor-Rain</td>
+                        <td>2019</td>
+                        <td>9,000</td>
+                        <td>1,500</td>
+                        <td>Degraded by both fog and rain streaks</td>
+                        <td>Synthetic</td>
+                    </tr>
+                    <tr>
+                        <td>SPA</td>
+                        <td>2019</td>
+                        <td>295,000</td>
+                        <td>1,000</td>
+                        <td>Various natural rain scenes</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>Rain1400</td>
+                        <td>2017</td>
+                        <td>12,600</td>
+                        <td>1,400</td>
+                        <td>Diverse rainfall directions and levels</td>
+                        <td>Synthetic</td>
+                    </tr>
+                    <tr>
+                        <td>Rain100L/H</td>
+                        <td>2017</td>
+                        <td>200</td>
+                        <td>100</td>
+                        <td>Five rain streaks</td>
+                        <td>Synthetic</td>
+                    </tr>
+
+                    <!-- Image Dehazing -->
+                    <tr>
+                        <td rowspan="4">Image Dehazing</td>
+                        <td>Dense-Haze</td>
+                        <td>2019</td>
+                        <td>33</td>
+                        <td>-</td>
+                        <td>Outdoor hazy scenes</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>RESIDE-OTS</td>
+                        <td>2019</td>
+                        <td>313,950</td>
+                        <td>-</td>
+                        <td>Outdoor training set</td>
+                        <td>Real</td>
+                    </tr>
+                    <tr>
+                        <td>RESIDE-ITS</td>
+                        <td>2019</td>
+                        <td>110,000</td>
+                        <td>-</td>
+                        <td>Indoor training set</td>
+                        <td>Synthetic</td>
+                    </tr>
+                    <tr>
+                        <td>RESIDE-HSTS</td>
+                        <td>2019</td>
+                        <td>-</td>
+                        <td>20</td>
+                        <td>Hybrid subjective testing set</td>
+                        <td>Synthetic and Real</td>
+                    </tr>
+
+                    <!-- Low-light Image Enhancement -->
+                    <tr>
+                        <td>Low-light Image Enhancement</td>
+                        <td>LOL</td>
+                        <td>2018</td>
+                        <td>485</td>
+                        <td>15</td>
+                        <td>Low- and normal-light images at 400x600</td>
+                        <td>Real</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Experiments -->
+        <section id="experiments" class="mt-5">
+            <h2>Experiments</h2>
+            <p>We conducted comprehensive experiments to evaluate the performance of various AiOIR models across different tasks. The results are presented in the tables below.</p>
+
+            <!-- Table 1: Performance Comparisons of AiOIR Models on Three Challenging Datasets -->
+            <section id="results1" class="mt-5">
+                <h3>Performance Comparisons on Three Challenging Datasets</h3>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th rowspan="2">Category</th>
+                            <th rowspan="2">Method</th>
+                            <th rowspan="2">Venue</th>
+                            <th rowspan="2">Params.</th>
+                            <th>Dehazing</th>
+                            <th>Deraining</th>
+                            <th colspan="3">Denoising on BSD68</th>
+                            <th rowspan="2">Average</th>
+                            <th rowspan="2">Approach</th>
+                        </tr>
+                        <tr>
+                            <th>SOTS</th>
+                            <th>Rain100L</th>
+                            <th>σ=15</th>
+                            <th>σ=25</th>
+                            <th>σ=50</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Single Degradation Models -->
+                        <tr>
+                            <td rowspan="4">Single</td>
+                            <td>LPN</td>
+                            <td>CVPR'19</td>
+                            <td>3M</td>
+                            <td>20.84/0.828</td>
+                            <td>24.88/0.784</td>
+                            <td>26.47/0.778</td>
+                            <td>24.77/0.748</td>
+                            <td>21.26/0.552</td>
+                            <td>23.64/0.738</td>
+                            <td>Specific</td>
+                        </tr>
+                        <tr>
+                            <td>ADFNet</td>
+                            <td>AAAI'23</td>
+                            <td>8M</td>
+                            <td>28.13/0.961</td>
+                            <td>34.24/0.965</td>
+                            <td>33.76/0.929</td>
+                            <td>30.83/0.871</td>
+                            <td>27.75/0.793</td>
+                            <td>30.94/0.904</td>
+                            <td>Specific</td>
+                        </tr>
+                        <tr>
+                            <td>DehazeFormer</td>
+                            <td>TIP'23</td>
+                            <td>25M</td>
+                            <td>29.58/0.970</td>
+                            <td>35.37/0.969</td>
+                            <td>33.01/0.914</td>
+                            <td>30.14/0.858</td>
+                            <td>27.37/0.779</td>
+                            <td>31.09/0.898</td>
+                            <td>Specific</td>
+                        </tr>
+                        <tr>
+                            <td>DRSformer</td>
+                            <td>CVPR'23</td>
+                            <td>33M</td>
+                            <td>29.02/0.968</td>
+                            <td>35.89/0.970</td>
+                            <td>33.28/0.921</td>
+                            <td>30.55/0.862</td>
+                            <td>27.58/0.786</td>
+                            <td>31.26/0.902</td>
+                            <td>Specific</td>
+                        </tr>
+
+                        <!-- Multiple Degradation Models -->
+                        <tr>
+                            <td rowspan="5">Multiple</td>
+                            <td>MPRNet</td>
+                            <td>CVPR'21</td>
+                            <td>16M</td>
+                            <td>28.00/0.958</td>
+                            <td>33.86/0.958</td>
+                            <td>33.27/0.920</td>
+                            <td>30.76/0.871</td>
+                            <td>27.29/0.761</td>
+                            <td>30.63/0.894</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>Restormer</td>
+                            <td>CVPR'22</td>
+                            <td>26M</td>
+                            <td>27.78/0.958</td>
+                            <td>33.78/0.958</td>
+                            <td>33.72/0.865</td>
+                            <td>30.67/0.865</td>
+                            <td>27.63/0.792</td>
+                            <td>30.75/0.901</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>NAFNet</td>
+                            <td>ECCV'22</td>
+                            <td>17M</td>
+                            <td>24.11/0.960</td>
+                            <td>33.64/0.956</td>
+                            <td>33.18/0.918</td>
+                            <td>30.47/0.865</td>
+                            <td>27.12/0.754</td>
+                            <td>29.67/0.844</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>FSNet</td>
+                            <td>TPAMI'23</td>
+                            <td>13M</td>
+                            <td>29.14/0.969</td>
+                            <td>35.61/0.969</td>
+                            <td>33.81/0.874</td>
+                            <td>30.84/0.872</td>
+                            <td>27.69/0.762</td>
+                            <td>31.42/0.906</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>MambaIR</td>
+                            <td>ECCV'24</td>
+                            <td>27M</td>
+                            <td>29.57/0.970</td>
+                            <td>35.42/0.969</td>
+                            <td>33.88/0.931</td>
+                            <td>30.95/0.874</td>
+                            <td>27.74/0.793</td>
+                            <td>31.51/0.907</td>
+                            <td>General</td>
+                        </tr>
+
+                        <!-- All-in-One Models -->
+                        <tr>
+                            <td rowspan="27"><strong>All-in-One</strong></td>
+                            <td>DL</td>
+                            <td>TPAMI'19</td>
+                            <td>2M</td>
+                            <td>26.92/0.931</td>
+                            <td>32.62/0.931</td>
+                            <td>33.05/0.914</td>
+                            <td>30.41/0.861</td>
+                            <td>26.90/0.740</td>
+                            <td>29.98/0.875</td>
+                            <td>Parameterized Image Operator</td>
+                        </tr>
+                        <tr>
+                            <td>TKMANet</td>
+                            <td>CVPR'22</td>
+                            <td>29M</td>
+                            <td>30.41/0.973</td>
+                            <td>34.94/0.972</td>
+                            <td>33.02/0.924</td>
+                            <td>30.31/0.820</td>
+                            <td>23.80/0.556</td>
+                            <td>30.50/0.849</td>
+                            <td>Two-stage Knowledge Learning</td>
+                        </tr>
+                        <tr>
+                            <td>AirNet</td>
+                            <td>CVPR'22</td>
+                            <td>9M</td>
+                            <td>27.94/0.962</td>
+                            <td>34.90/0.967</td>
+                            <td>33.92/0.933</td>
+                            <td>31.26/0.888</td>
+                            <td>28.00/0.797</td>
+                            <td>31.20/0.910</td>
+                            <td>contrastive-based & degradation-guided</td>
+                        </tr>
+                        <tr>
+                            <td>PIP<sub>restormer</sub></td>
+                            <td>arXiv'23</td>
+                            <td>27M</td>
+                            <td>32.09/0.981</td>
+                            <td>38.29/0.984</td>
+                            <td>34.24/0.936</td>
+                            <td>31.60/0.893</td>
+                            <td>28.35/0.806</td>
+                            <td>32.91/0.920</td>
+                            <td>prompt-in-prompt learning</td>
+                        </tr>
+                        <tr>
+                            <td>IDR</td>
+                            <td>CVPR'23</td>
+                            <td>15M</td>
+                            <td>29.87/0.970</td>
+                            <td>36.03/0.971</td>
+                            <td>33.89/0.931</td>
+                            <td>31.32/0.884</td>
+                            <td>28.04/0.798</td>
+                            <td>31.83/0.911</td>
+                            <td>ingredient-oriented learning</td>
+                        </tr>
+                        <tr>
+                            <td>PromptIR</td>
+                            <td>NeurIPS'23</td>
+                            <td>33M</td>
+                            <td>30.58/0.974</td>
+                            <td>36.37/0.972</td>
+                            <td>33.98/0.933</td>
+                            <td>31.31/0.888</td>
+                            <td>28.06/0.799</td>
+                            <td>32.06/0.913</td>
+                            <td>prompt for AiOIR</td>
+                        </tr>
+                        <tr>
+                            <td>TextPromptIR</td>
+                            <td>arXiv'23</td>
+                            <td>-</td>
+                            <td>31.65/0.978</td>
+                            <td>38.41/0.982</td>
+                            <td>34.17/0.936</td>
+                            <td>31.52/0.893</td>
+                            <td>28.26/0.805</td>
+                            <td>32.80/0.919</td>
+                            <td>textual prompt for AiOIR</td>
+                        </tr>
+                        <tr>
+                            <td>Gridformer</td>
+                            <td>IJCV'23</td>
+                            <td>34M</td>
+                            <td>30.37/0.970</td>
+                            <td>37.15/0.972</td>
+                            <td>33.93/0.931</td>
+                            <td>31.37/0.887</td>
+                            <td>28.11/0.801</td>
+                            <td>32.19/0.912</td>
+                            <td>transformer with grid structure</td>
+                        </tr>
+                        <tr>
+                            <td>ProRes</td>
+                            <td>arXiv'23</td>
+                            <td>371M</td>
+                            <td>28.38/0.938</td>
+                            <td>33.68/0.954</td>
+                            <td>32.10/0.907</td>
+                            <td>30.18/0.863</td>
+                            <td>27.58/0.779</td>
+                            <td>30.38/0.888</td>
+                            <td>degradation-aware visual prompt</td>
+                        </tr>
+                        <tr>
+                            <td>NDR</td>
+                            <td>arXiv'23</td>
+                            <td>28M</td>
+                            <td>28.64/0.962</td>
+                            <td>35.42/0.969</td>
+                            <td>34.01/0.932</td>
+                            <td>31.36/0.887</td>
+                            <td>28.10/0.798</td>
+                            <td>31.51/0.910</td>
+                            <td>neural degradation representation</td>
+                        </tr>
+                        <tr>
+                            <td>DA-CLIP</td>
+                            <td>ICLR'24</td>
+                            <td>125M</td>
+                            <td>29.46/0.963</td>
+                            <td>36.28/0.968</td>
+                            <td>30.02/0.821</td>
+                            <td>24.86/0.585</td>
+                            <td>22.29/0.476</td>
+                            <td>-/-</td>
+                            <td>degradation-aware vision-language model</td>
+                        </tr>
+                        <tr>
+                            <td>AnyIR</td>
+                            <td>arXiv'24</td>
+                            <td>6M</td>
+                            <td>31.38/0.979</td>
+                            <td>37.90/0.981</td>
+                            <td>33.95/0.933</td>
+                            <td>31.29/0.889</td>
+                            <td>28.03/0.797</td>
+                            <td>32.51/0.916</td>
+                            <td>local-global gated intertwining</td>
+                        </tr>
+                        <tr>
+                            <td>DaAIR</td>
+                            <td>arXiv'24</td>
+                            <td>6M</td>
+                            <td>32.30/0.981</td>
+                            <td>37.10/0.978</td>
+                            <td>33.92/0.930</td>
+                            <td>31.26/0.884</td>
+                            <td>28.00/0.792</td>
+                            <td>32.51/0.913</td>
+                            <td>efficient degradation-aware</td>
+                        </tr>
+                        <tr>
+                            <td>Art<sub>AirNet</sub></td>
+                            <td>ACM MM'24</td>
+                            <td>9M</td>
+                            <td>30.56/0.977</td>
+                            <td>37.74/0.981</td>
+                            <td>34.02/0.934</td>
+                            <td>31.37/0.890</td>
+                            <td>28.12/0.802</td>
+                            <td>32.36/0.917</td>
+                            <td>via multi-task collaboration</td>
+                        </tr>
+                        <tr>
+                            <td>Art<sub>PromptIR</sub></td>
+                            <td>ACM MM'24</td>
+                            <td>33M</td>
+                            <td>30.83/0.979</td>
+                            <td>37.94/0.982</td>
+                            <td>34.06/0.934</td>
+                            <td>31.42/0.891</td>
+                            <td>28.14/0.801</td>
+                            <td>32.49/0.917</td>
+                            <td>via multi-task collaboration</td>
+                        </tr>
+                        <tr>
+                            <td>AdaIR</td>
+                            <td>arXiv'24</td>
+                            <td>29M</td>
+                            <td>31.06/0.980</td>
+                            <td>38.64/0.983</td>
+                            <td>34.12/0.935</td>
+                            <td>31.45/0.892</td>
+                            <td>28.19/0.802</td>
+                            <td>32.69/0.918</td>
+                            <td>frequency mining and modulation</td>
+                        </tr>
+                        <tr>
+                            <td>CAPTNet</td>
+                            <td>TCSVT'24</td>
+                            <td>-</td>
+                            <td>29.28/-</td>
+                            <td>37.86/-</td>
+                            <td>-/-</td>
+                            <td>30.75/-</td>
+                            <td>-/-</td>
+                            <td>-/-</td>
+                            <td>prompt-based & ingredient-oriented</td>
+                        </tr>
+                        <tr>
+                            <td>InstructIR-3D</td>
+                            <td>ECCV'24</td>
+                            <td>16M</td>
+                            <td>30.22/0.959</td>
+                            <td>37.98/0.978</td>
+                            <td>34.15/0.933</td>
+                            <td>31.52/0.890</td>
+                            <td>28.30/0.804</td>
+                            <td>32.43/0.913</td>
+                            <td>natural language prompts</td>
+                        </tr>
+                        <tr>
+                            <td>InstructIR-5D</td>
+                            <td>ECCV'24</td>
+                            <td>16M</td>
+                            <td>27.10/0.956</td>
+                            <td>36.84/0.973</td>
+                            <td>34.00/0.931</td>
+                            <td>31.40/0.887</td>
+                            <td>28.15/0.798</td>
+                            <td>31.50/0.909</td>
+                            <td>natural language prompts</td>
+                        </tr>
+                        <tr>
+                            <td>MEASNet</td>
+                            <td>arXiv'24</td>
+                            <td>31M</td>
+                            <td>31.61/0.981</td>
+                            <td>39.00/0.985</td>
+                            <td>34.12/0.935</td>
+                            <td>31.46/0.892</td>
+                            <td>28.19/0.803</td>
+                            <td>32.85/0.919</td>
+                            <td>multi-expert adaptive selection</td>
+                        </tr>
+                        <tr>
+                            <td>Instruct-IPT</td>
+                            <td>arXiv'24</td>
+                            <td>-</td>
+                            <td>39.95/-</td>
+                            <td>37.88/-</td>
+                            <td>34.40/-</td>
+                            <td>31.79/-</td>
+                            <td>28.61/-</td>
+                            <td>-/-</td>
+                            <td>IPT via weight modulation</td>
+                        </tr>
+                        <tr>
+                            <td>U-WADN</td>
+                            <td>arXiv'24</td>
+                            <td>6M</td>
+                            <td>29.21/0.971</td>
+                            <td>35.36/0.968</td>
+                            <td>33.73/0.931</td>
+                            <td>31.14/0.886</td>
+                            <td>27.92/0.793</td>
+                            <td>31.47/0.910</td>
+                            <td>unified-width adaptive network</td>
+                        </tr>
+                        <tr>
+                            <td>Shi <em>et al.</em></td>
+                            <td>arXiv'24</td>
+                            <td>-</td>
+                            <td>29.20/0.972</td>
+                            <td>37.50/0.980</td>
+                            <td>34.59/0.941</td>
+                            <td>31.83/0.900</td>
+                            <td>28.46/0.814</td>
+                            <td>32.32/0.921</td>
+                            <td>frequency-aware transformers</td>
+                        </tr>
+                        <tr>
+                            <td>Perceive-IR</td>
+                            <td>arXiv'24</td>
+                            <td>42M</td>
+                            <td>30.87/0.975</td>
+                            <td>38.29/0.980</td>
+                            <td>34.13/0.934</td>
+                            <td>31.53/0.890</td>
+                            <td>28.31/0.804</td>
+                            <td>32.63/0.917</td>
+                            <td>quality-aware degradation</td>
+                        </tr>
+                        <tr>
+                            <td>UniProcessor</td>
+                            <td>arXiv'24</td>
+                            <td>-</td>
+                            <td>31.66/0.979</td>
+                            <td>38.17/0.982</td>
+                            <td>34.08/0.935</td>
+                            <td>31.42/0.891</td>
+                            <td>28.17/0.803</td>
+                            <td>32.70/0.918</td>
+                            <td>support multimodal control</td>
+                        </tr>
+                        <tr>
+                            <td>DyNet</td>
+                            <td>arXiv'24</td>
+                            <td>16M</td>
+                            <td>31.98/0.981</td>
+                            <td>38.71/0.983</td>
+                            <td>34.11/0.936</td>
+                            <td>31.44/0.892</td>
+                            <td>28.18/0.803</td>
+                            <td>32.88/0.920</td>
+                            <td>dynamic pre-training</td>
+                        </tr>
+                        <tr>
+                            <td>Hair</td>
+                            <td>arXiv'24</td>
+                            <td>29M</td>
+                            <td>30.98/0.979</td>
+                            <td>38.59/0.983</td>
+                            <td>34.16/0.935</td>
+                            <td>31.51/0.892</td>
+                            <td>28.24/0.803</td>
+                            <td>32.70/0.919</td>
+                            <td>hypernetworks-based</td>
+                        </tr>                        
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Table 2: Performance Comparisons on Five Challenging Datasets -->
+            <section id="results2" class="mt-5">
+                <h3>Performance Comparisons on Five Challenging Datasets</h3>
+                <p>Denoising results are reported for the noise level σ = 25.</p>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th rowspan="2">Category</th>
+                            <th rowspan="2">Method</th>
+                            <th rowspan="2">Venue</th>
+                            <th rowspan="2">Params.</th>
+                            <th>Dehazing</th>
+                            <th>Deraining</th>
+                            <th>Denoising</th>
+                            <th>Deblurring</th>
+                            <th>Low-light</th>
+                            <th rowspan="2">Average</th>
+                            <th rowspan="2">Approach</th>
+                        </tr>
+                        <tr>
+                            <th>SOTS</th>
+                            <th>Rain100L</th>
+                            <th>BSD68</th>
+                            <th>GoPro</th>
+                            <th>LOL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Single Degradation Models -->
+                        <tr>
+                            <td rowspan="5">Single</td>
+                            <td>ADFNet</td>
+                            <td>AAAI'23</td>
+                            <td>8M</td>
+                            <td>24.18/0.928</td>
+                            <td>32.97/0.943</td>
+                            <td>31.15/0.882</td>
+                            <td>25.79/0.781</td>
+                            <td>21.15/0.823</td>
+                            <td>27.05/0.871</td>
+                            <td>Specific</td>
+                        </tr>
+                        <tr>
+                            <td>DehazeFormer</td>
+                            <td>TIP'23</td>
+                            <td>25M</td>
+                            <td>25.31/0.937</td>
+                            <td>33.68/0.954</td>
+                            <td>30.89/0.880</td>
+                            <td>25.93/0.785</td>
+                            <td>21.31/0.819</td>
+                            <td>27.42/0.875</td>
+                            <td>Specific</td>
+                        </tr>
+                        <tr>
+                            <td>DRSformer</td>
+                            <td>CVPR'23</td>
+                            <td>34M</td>
+                            <td>24.66/0.931</td>
+                            <td>33.45/0.953</td>
+                            <td>30.97/0.881</td>
+                            <td>25.56/0.780</td>
+                            <td>21.77/0.821</td>
+                            <td>27.28/0.873</td>
+                            <td>Specific</td>
+                        </tr>
+                        <tr>
+                            <td>HI-Diff</td>
+                            <td>NeurIPS'23</td>
+                            <td>24M</td>
+                            <td>25.09/0.935</td>
+                            <td>33.26/0.951</td>
+                            <td>30.61/0.878</td>
+                            <td>26.48/0.800</td>
+                            <td>22.01/0.870</td>
+                            <td>27.49/0.887</td>
+                            <td>Specific</td>
+                        </tr>
+                        <tr>
+                            <td>Retinexformer</td>
+                            <td>ICCV'23</td>
+                            <td>2M</td>
+                            <td>24.81/0.933</td>
+                            <td>32.68/0.940</td>
+                            <td>30.84/0.880</td>
+                            <td>25.09/0.779</td>
+                            <td>22.76/0.863</td>
+                            <td>27.24/0.873</td>
+                            <td>Specific</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="7">Multiple</td>
+                            <td>SwinIR</td>
+                            <td>ICCVW'21</td>
+                            <td>1M</td>
+                            <td>21.50/0.891</td>
+                            <td>30.78/0.923</td>
+                            <td>30.59/0.868</td>
+                            <td>24.52/0.773</td>
+                            <td>17.81/0.723</td>
+                            <td>25.04/0.835</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>MIRNet-v2</td>
+                            <td>TPAMI'22</td>
+                            <td>6M</td>
+                            <td>24.03/0.927</td>
+                            <td>33.89/0.954</td>
+                            <td>30.97/0.881</td>
+                            <td>26.30/0.799</td>
+                            <td>21.52/0.815</td>
+                            <td>27.34/0.875</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>DGUNet</td>
+                            <td>CVPR'22</td>
+                            <td>17M</td>
+                            <td>24.78/0.940</td>
+                            <td>36.62/0.971</td>
+                            <td>31.10/0.883</td>
+                            <td>27.25/0.837</td>
+                            <td>21.87/0.823</td>
+                            <td>28.32/0.891</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>Restormer</td>
+                            <td>CVPR'22</td>
+                            <td>26M</td>
+                            <td>24.09/0.927</td>
+                            <td>34.81/0.960</td>
+                            <td>31.49/0.884</td>
+                            <td>27.22/0.829</td>
+                            <td>20.41/0.806</td>
+                            <td>27.60/0.881</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>NAFNet</td>
+                            <td>ECCV'22</td>
+                            <td>17M</td>
+                            <td>25.23/0.939</td>
+                            <td>35.56/0.967</td>
+                            <td>31.02/0.883</td>
+                            <td>26.53/0.808</td>
+                            <td>20.49/0.809</td>
+                            <td>27.76/0.881</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>FSNet</td>
+                            <td>TPAMI'23</td>
+                            <td>13M</td>
+                            <td>25.53/0.943</td>
+                            <td>36.07/0.968</td>
+                            <td>31.33/0.883</td>
+                            <td>28.32/0.869</td>
+                            <td>22.29/0.829</td>
+                            <td>28.71/0.898</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td>MambaIR</td>
+                            <td>ECCV'24</td>
+                            <td>27M</td>
+                            <td>25.81/0.944</td>
+                            <td>36.55/0.971</td>
+                            <td>31.41/0.884</td>
+                            <td>28.61/0.875</td>
+                            <td>22.49/0.832</td>
+                            <td>28.97/0.901</td>
+                            <td>General</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="18"><strong>All-in-One</strong></td>
+                            <td>DL</td>
+                            <td>TPAMI'19</td>
+                            <td>2M</td>
+                            <td>20.54/0.826</td>
+                            <td>21.96/0.762</td>
+                            <td>23.09/0.745</td>
+                            <td>19.86/0.672</td>
+                            <td>19.83/0.712</td>
+                            <td>21.05/0.743</td>
+                            <td>parameterized image operator</td>
+                        </tr>
+                        <tr>
+                            <td>Transweather</td>
+                            <td>CVPR'22</td>
+                            <td>38M</td>
+                            <td>21.32/0.885</td>
+                            <td>29.43/0.905</td>
+                            <td>29.00/0.841</td>
+                            <td>25.12/0.757</td>
+                            <td>21.21/0.792</td>
+                            <td>25.22/0.836</td>
+                            <td>weather type queries</td>
+                        </tr>
+                        <tr>
+                            <td>TAPE</td>
+                            <td>ECCV'22</td>
+                            <td>1M</td>
+                            <td>22.16/0.861</td>
+                            <td>29.67/0.904</td>
+                            <td>30.18/0.855</td>
+                            <td>24.47/0.763</td>
+                            <td>18.97/0.621</td>
+                            <td>25.09/0.801</td>
+                            <td>task-agnostic prior</td>
+                        </tr>
+                        <tr>
+                            <td>AirNet</td>
+                            <td>CVPR'22</td>
+                            <td>9M</td>
+                            <td>21.04/0.884</td>
+                            <td>32.98/0.951</td>
+                            <td>30.91/0.882</td>
+                            <td>24.35/0.781</td>
+                            <td>18.18/0.735</td>
+                            <td>25.49/0.846</td>
+                            <td>contrastive-based & degradation-guided</td>
+                        </tr>
+                        <tr>
+                            <td>IDR</td>
+                            <td>CVPR'23</td>
+                            <td>15M</td>
+                            <td>25.24/0.943</td>
+                            <td>35.63/0.965</td>
+                            <td>31.60/0.887</td>
+                            <td>27.87/0.846</td>
+                            <td>21.34/0.826</td>
+                            <td>28.34/0.893</td>
+                            <td>ingredient-oriented learning</td>
+                        </tr>
+                        <tr>
+                            <td>PIP<sub>NAFNet</sub></td>
+                            <td>arXiv'23</td>
+                            <td>-</td>
+                            <td>31.75/0.978</td>
+                            <td>37.67/0.980</td>
+                            <td>31.25/0.878</td>
+                            <td>28.08/0.853</td>
+                            <td>23.37/0.854</td>
+                            <td>30.66/0.899</td>
+                            <td>prompt-in-prompt learning</td>
+                        </tr>
+                        <tr>
+                            <td>PIP<sub>Restormer</sub></td>
+                            <td>arXiv'23</td>
+                            <td>27M</td>
+                            <td>32.11/0.979</td>
+                            <td>38.09/0.983</td>
+                            <td>30.94/0.877</td>
+                            <td>28.61/0.861</td>
+                            <td>24.06/0.859</td>
+                            <td>30.81/0.901</td>
+                            <td>prompt-in-prompt learning</td>
+                        </tr>
+                        <tr>
+                            <td>PromptIR</td>
+                            <td>NeurIPS'23</td>
+                            <td>33M</td>
+                            <td>26.54/0.949</td>
+                            <td>36.37/0.970</td>
+                            <td>31.47/0.886</td>
+                            <td>28.71/0.881</td>
+                            <td>22.68/0.832</td>
+                            <td>29.15/0.904</td>
+                            <td>prompt for AiOIR</td>
+                        </tr>
+                        <tr>
+                            <td>DASL<sub>MPRNet</sub></td>
+                            <td>arXiv'23</td>
+                            <td>15M</td>
+                            <td>25.82/0.947</td>
+                            <td>38.02/0.980</td>
+                            <td>31.57/0.890</td>
+                            <td>26.91/0.823</td>
+                            <td>20.96/0.826</td>
+                            <td>28.66/0.893</td>
+                            <td>decomposition ascribed synergistic</td>
+                        </tr>
+                        <tr>
+                            <td>DASL<sub>DGINet</sub></td>
+                            <td>arXiv'23</td>
+                            <td>17M</td>
+                            <td>25.33/0.943</td>
+                            <td>36.96/0.972</td>
+                            <td>31.23/0.885</td>
+                            <td>27.23/0.836</td>
+                            <td>21.78/0.824</td>
+                            <td>28.51/0.892</td>
+                            <td>decomposition ascribed synergistic</td>
+                        </tr>
+                        <tr>
+                            <td>DASL<sub>MPRNet</sub></td>
+                            <td>arXiv'23</td>
+                            <td>5M</td>
+                            <td>23.64/0.924</td>
+                            <td>34.93/0.961</td>
+                            <td>30.99/0.883</td>
+                            <td>26.04/0.788</td>
+                            <td>20.06/0.805</td>
+                            <td>27.13/0.872</td>
+                            <td>decomposition ascribed synergistic</td>
+                        </tr>
+                        <tr>
+                            <td>Gridformer</td>
+                            <td>IJCV'23</td>
+                            <td>34M</td>
+                            <td>26.79/0.951</td>
+                            <td>36.61/0.971</td>
+                            <td>31.45/0.885</td>
+                            <td>29.22/0.884</td>
+                            <td>22.59/0.831</td>
+                            <td>29.33/0.904</td>
+                            <td>transformer with grid structure</td>
+                        </tr>
+                        <tr>
+                            <td>DaAIR</td>
+                            <td>arXiv'24</td>
+                            <td>6M</td>
+                            <td>31.97/0.980</td>
+                            <td>36.28/0.975</td>
+                            <td>31.07/0.878</td>
+                            <td>29.51/0.890</td>
+                            <td>22.38/0.825</td>
+                            <td>30.24/0.910</td>
+                            <td>efficient degradation-aware</td>
+                        </tr>
+                        <tr>
+                            <td>AnyIR</td>
+                            <td>arXiv'24</td>
+                            <td>6M</td>
+                            <td>29.84/0.977</td>
+                            <td>36.91/0.977</td>
+                            <td>31.15/0.882</td>
+                            <td>26.86/0.822</td>
+                            <td>23.50/0.845</td>
+                            <td>29.65/0.901</td>
+                            <td>local-global gated intertwining</td>
+                        </tr>
+                        <tr>
+                            <td>InstructIR</td>
+                            <td>ECCV'24</td>
+                            <td>16M</td>
+                            <td>36.84/0.973</td>
+                            <td>27.10/0.956</td>
+                            <td>31.40/0.887</td>
+                            <td>29.40/0.886</td>
+                            <td>23.00/0.836</td>
+                            <td>29.55/0.907</td>
+                            <td>natural language prompts</td>
+                        </tr>
+                        <tr>
+                            <td>MEASNet</td>
+                            <td>arXiv'24</td>
+                            <td>31M</td>
+                            <td>31.05/0.980</td>
+                            <td>38.32/0.982</td>
+                            <td>31.40/0.888</td>
+                            <td>29.41/0.890</td>
+                            <td>23.00/0.845</td>
+                            <td>30.64/0.917</td>
+                            <td>multi-expert adaptive selection</td>
+                        </tr>
+                        <tr>
+                            <td>Perceive-IR</td>
+                            <td>arXiv'24</td>
+                            <td>42M</td>
+                            <td>28.19/0.964</td>
+                            <td>37.25/0.977</td>
+                            <td>31.44/0.887</td>
+                            <td>29.46/0.886</td>
+                            <td>22.88/0.833</td>
+                            <td>29.84/0.909</td>
+                            <td>quality-aware degradation</td>
+                        </tr>
+                        <tr>
+                            <td>Hair</td>
+                            <td>arXiv'24</td>
+                            <td>29M</td>
+                            <td>30.62/0.978</td>
+                            <td>38.11/0.981</td>
+                            <td>31.49/0.891</td>
+                            <td>28.52/0.874</td>
+                            <td>23.12/0.847</td>
+                            <td>30.37/0.914</td>
+                            <td>hypernetworks-based</td>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Table 3: Performance Comparisons on All-Weather Datasets -->
+            <section id="results3" class="mt-5">
+                <h3>Performance Comparisons on All-Weather Datasets</h3>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Method</th>
+                            <th>Snow</th>
+                            <th>Rain+Fog</th>
+                            <th>Raindrop</th>
+                            <th>Average</th>
+                            <th>Params</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Non-AiOIR Methods -->
+                        <tr>
+                            <td>SwinIR</td>
+                            <td>28.18/0.880</td>
+                            <td>23.23/0.869</td>
+                            <td>30.82/0.904</td>
+                            <td>27.41/0.884</td>
+                            <td>12M</td>
+                        </tr>
+                        <tr>
+                            <td>MPRNet</td>
+                            <td>28.66/0.869</td>
+                            <td>30.25/0.914</td>
+                            <td>30.99/0.916</td>
+                            <td>29.30/0.900</td>
+                            <td>4M</td>
+                        </tr>
+                        <tr>
+                            <td>Restormer</td>
+                            <td>29.37/0.881</td>
+                            <td>29.22/0.907</td>
+                            <td>31.21/0.919</td>
+                            <td>29.93/0.902</td>
+                            <td>18M</td>
+                        </tr>
+                        <!-- AiOIR Methods -->
+                        <tr>
+                            <td colspan="6" class="text-center">AiOIR Methods</td>
+                        </tr>
+                        <tr>
+                            <td>All-in-One</td>
+                            <td>28.33/0.882</td>
+                            <td>24.71/0.898</td>
+                            <td>31.12/0.927</td>
+                            <td>28.05/0.902</td>
+                            <td>44M</td>
+                        </tr>
+                        <tr>
+                            <td>Transweather</td>
+                            <td>29.31/0.888</td>
+                            <td>28.83/0.900</td>
+                            <td>30.17/0.916</td>
+                            <td>29.44/0.901</td>
+                            <td>38M</td>
+                        </tr>
+                        <tr>
+                            <td>AirNet</td>
+                            <td>27.92/0.858</td>
+                            <td>23.12/0.837</td>
+                            <td>28.23/0.892</td>
+                            <td>26.42/0.862</td>
+                            <td>9M</td>
+                        </tr>
+                        <tr>
+                            <td>WGWS-Net</td>
+                            <td>28.91/0.856</td>
+                            <td>29.28/0.922</td>
+                            <td>32.01/0.925</td>
+                            <td>30.07/0.901</td>
+                            <td>6M</td>
+                        </tr>
+                        <tr>
+                            <td>WeatherDiff</td>
+                            <td>30.09/0.904</td>
+                            <td>29.64/0.931</td>
+                            <td>30.71/0.931</td>
+                            <td>30.15/0.922</td>
+                            <td>83M</td>
+                        </tr>
+                        <tr>
+                            <td>TKMANet</td>
+                            <td>30.24/0.902</td>
+                            <td>29.92/0.917</td>
+                            <td>30.99/0.927</td>
+                            <td>30.38/0.915</td>
+                            <td>29M</td>
+                        </tr>
+                        <tr>
+                            <td>UtilityIR</td>
+                            <td>29.47/0.879</td>
+                            <td>31.16/0.927</td>
+                            <td>32.01/0.925</td>
+                            <td>30.88/0.910</td>
+                            <td>26M</td>
+                        </tr>
+                        <tr>
+                            <td>AWRCP</td>
+                            <td>31.92/0.934</td>
+                            <td>31.39/0.933</td>
+                            <td>31.93/0.931</td>
+                            <td>31.75/0.933</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+
+            <!-- Table 4: Performance Comparisons on WeatherStream Datasets -->
+            <section id="results4" class="mt-5">
+                <h3>Performance Comparisons on WeatherStream Datasets</h3>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Method</th>
+                            <th>Haze</th>
+                            <th>Rain</th>
+                            <th>Snow</th>
+                            <th>Average</th>
+                            <th>Params</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Non-AiOIR Methods -->
+                        <tr>
+                            <td>NAFNet</td>
+                            <td>22.20/0.803</td>
+                            <td>23.01/0.803</td>
+                            <td>22.11/0.826</td>
+                            <td>22.44/0.811</td>
+                            <td>17M</td>
+                        </tr>
+                        <tr>
+                            <td>GRL</td>
+                            <td>22.88/0.802</td>
+                            <td>23.75/0.805</td>
+                            <td>22.59/0.829</td>
+                            <td>23.07/0.812</td>
+                            <td>3M</td>
+                        </tr>
+                        <tr>
+                            <td>Restormer</td>
+                            <td>22.90/0.803</td>
+                            <td>23.67/0.804</td>
+                            <td>22.51/0.828</td>
+                            <td>22.86/0.812</td>
+                            <td>18M</td>
+                        </tr>
+                        <tr>
+                            <td>MPRNet</td>
+                            <td>21.73/0.763</td>
+                            <td>21.50/0.791</td>
+                            <td>20.74/0.801</td>
+                            <td>21.32/0.785</td>
+                            <td>20M</td>
+                        </tr>
+                        
+                        <!-- AiOIR Methods -->
+                        <tr>
+                            <td colspan="6" class="text-center">AiOIR Methods</td>
+                        </tr>
+                        <tr>
+                            <td>Transweather</td>
+                            <td>22.55/0.774</td>
+                            <td>22.21/0.772</td>
+                            <td>21.79/0.792</td>
+                            <td>22.18/0.779</td>
+                            <td>38M</td>
+                        </tr>
+                        <tr>
+                            <td>AirNet</td>
+                            <td>21.56/0.770</td>
+                            <td>22.52/0.797</td>
+                            <td>21.44/0.812</td>
+                            <td>21.84/0.793</td>
+                            <td>9M</td>
+                        </tr>
+                        <tr>
+                            <td>TKMANet</td>
+                            <td>22.38/0.805</td>
+                            <td>23.22/0.795</td>
+                            <td>22.25/0.827</td>
+                            <td>22.62/0.809</td>
+                            <td>29M</td>
+                        </tr>
+                        <tr>
+                            <td>WGWS-Net</td>
+                            <td>22.78/0.800</td>
+                            <td>23.80/0.807</td>
+                            <td>22.72/0.831</td>
+                            <td>23.10/0.813</td>
+                            <td>6M</td>
+                        </tr>
+                        <tr>
+                            <td>LDR</td>
+                            <td>23.11/0.809</td>
+                            <td>24.42/0.818</td>
+                            <td>23.12/0.838</td>
+                            <td>23.55/0.822</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+
+        <!-- References -->
+        <!-- <section id="references" class="mt-5">
+            <h2>References</h2>
+            <p>For more detailed information, please refer to our full paper and the references therein.</p>
+        </section> -->
     </div>
 
-    <footer>
-        &copy; 2024 Junjun Jiang and Co-authors. All rights reserved.
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+            © 2024 Junjun Jiang et al. All rights reserved.
+        </div>
     </footer>
+
+    <!-- Include Bootstrap JS library -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Include custom scripts -->
+    <script src="js/main.js"></script>
 </body>
 </html>
 
